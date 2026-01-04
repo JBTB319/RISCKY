@@ -8,7 +8,6 @@
 #include <sstream>
 #include <fstream>
 
-
 class instructionFetcher {
    private:
       std::vector<std::uint32_t> memory;

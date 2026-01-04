@@ -6,7 +6,7 @@ void enums::printEnum(Instruction inst)
    switch (inst)
    {
       // NONE
-      case Instruction::NONE: name = "NONE"; break;
+      case Instruction::UNKNOWN: name = "UNKNOWN"; break;
       // IMMEDIATE TYPES (I-Type)
       case Instruction::ADDI:name = "ADDI";break;
       case Instruction::SLTI: name = "SLTI"; break;

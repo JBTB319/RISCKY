@@ -10,7 +10,6 @@ instructionFetcher::instructionFetcher(const std::string& address) {
    std::uint32_t tmp;
    std::string tmpString;
    
-
    while (instruction_file >> tmpString)
    {
       std::stringstream ss;
@@ -23,7 +22,7 @@ instructionFetcher::instructionFetcher(const std::string& address) {
 }
 
 const std::uint32_t instructionFetcher::fetch() {
-   if (pc == memory.size()) {
+   if (pc > memory.size()) {
       exit(0);
    }
 

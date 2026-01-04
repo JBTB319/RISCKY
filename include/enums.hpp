@@ -6,7 +6,7 @@
 
 namespace enums {
    enum class Instruction {
-      NONE, // For testing
+      UNKNOWN, // For testing
       // Immediate Types
       ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI,
       // Register Type
@@ -29,7 +29,8 @@ namespace enums {
       B_TYPE,
       S_TYPE,
       J_TYPE,
-      U_TYPE
+      U_TYPE,
+      UNKNOWN
    };
 
    void printEnum(IType type);

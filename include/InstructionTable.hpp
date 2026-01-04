@@ -29,7 +29,6 @@ struct instructionKeyHash {
    }
 };
 
-
 namespace instructionTable {
    const std::unordered_map<instructionKey, Instruction, instructionKeyHash>& getTable() {
       static const std::unordered_map<instructionKey, Instruction, instructionKeyHash> table = {
@@ -42,7 +41,7 @@ namespace instructionTable {
          {{0x13, 0x5, 0x20}, Instruction::SRAI},
          {{0x13, 0x6, 0x0}, Instruction::ORI},
          {{0x13, 0x7, 0x0}, Instruction::ANDI},
-         
+
          {{0x33, 0x0, 0x0}, Instruction::ADD},
          {{0x33, 0x0, 0x20}, Instruction::SUB},
          {{0x33, 0x1, 0x0}, Instruction::SLL},

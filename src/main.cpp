@@ -24,7 +24,7 @@ int main() {
    while (instruction_file >> tmpString)
    {
       std::stringstream ss;
-      ss << std::hex << tmpString.substr(2);
+      ss << std::hex << tmpString.substr(2); 
       ss >> tmp;
       memory.push_back(tmp);
    }

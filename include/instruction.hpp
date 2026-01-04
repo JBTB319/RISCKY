@@ -7,6 +7,9 @@
 struct instruction {
    enums::IType Type;
    enums::Instruction Name;
+   std::uint8_t Opcode;
+   std::uint8_t Fun3;
+   std::uint8_t Fun7;
    std::uint8_t RegA;
    std::uint8_t RegB;
    std::uint8_t RegC;

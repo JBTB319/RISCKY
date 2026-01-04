@@ -10,6 +10,7 @@ namespace instructionDecoder {
    uint8_t extractFun3(enums::IType type, uint32_t binary);
    uint8_t extractFun7(enums::IType type, uint32_t binary, uint8_t fun3, uint8_t opCode);
    instruction decode(std::uint32_t binary);
+
 }
 
 #endif
