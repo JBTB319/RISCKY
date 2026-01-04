@@ -49,6 +49,8 @@ namespace instructionDecoder {
             instruct.Type = (enums::IType::U_TYPE);
             break;
          case 0x6f: instruct.Type = (enums::IType::J_TYPE); break;
+         default:
+            instruct.Type = enums::IType::UNKNOWN;
       }
 
    }

@@ -21,24 +21,24 @@ instructionFetcher::instructionFetcher(const std::string& address) {
    pc = 0;
 }
 
-const std::uint32_t instructionFetcher::fetch() {
-   if (pc > memory.size()) {
-      exit(0);
+const bool instructionFetcher::fetch(uint32_t& instruct) {
+   if (pc >= memory.size()) {
+      return false;
    }
 
-   std::uint32_t instruct = memory.at(pc);
+   instruct = memory.at(pc);
 
    pc++;
 
-   return instruct;
+   return true;
 }
 
-const std::uint32_t instructionFetcher::fetch(uint32_t offset) {
-   if (pc == memory.size()) {
-      exit(0);
+const bool instructionFetcher::fetch(uint32_t& instruct, uint32_t offset) {
+   if (pc >= memory.size()) {
+      return 0;
    }
 
-   std::uint32_t instruct = memory.at(pc);
+   instruct = memory.at(pc);
 
    pc++;
 

@@ -6,38 +6,26 @@
 #include <cstdint>
 
 #include "instructionDecoder.hpp"
+#include "instructionFetcher.hpp"
 
 
-int main() {
-   std::vector<uint32_t> memory;
-
-   std::ifstream instruction_file("tests/All.hex");
-
-   if(!instruction_file) {
-      throw std::invalid_argument("File does not exist!");
+int main(int argc, char* argv[]) {
+   if (argc != 2) {
+      std::cout << "Only pass one file\n";
+      exit(0);
    }
 
-   std::uint32_t tmp;
-   std::string tmpString;
-   
+   instructionFetcher fetcher(argv[1]);
+   uint32_t fetched;
+   instruction instruct;
 
-   while (instruction_file >> tmpString)
-   {
-      std::stringstream ss;
-      ss << std::hex << tmpString.substr(2); 
-      ss >> tmp;
-      memory.push_back(tmp);
-   }
-
-   instruction instruct; 
-
-   for (int i = 0; i < memory.size(); i++) {
-      //std::cout << std::hex << memory.at(i) << "\n";
-      instruct = instructionDecoder::decode(memory.at(i));
+   while( fetcher.fetch(fetched)) {
+      instruct = instructionDecoder::decode(fetched);
       enums::printEnum(instruct.Name);
       enums::printEnum(instruct.Type);
       std::cout << "\n";
       std::cout << instruct.Imm << "\n--------\n";
    }
+
 
 }

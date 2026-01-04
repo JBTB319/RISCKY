@@ -14,8 +14,8 @@ class instructionFetcher {
       std::uint32_t pc;
    public:
       instructionFetcher(const std::string& address);
-      const std::uint32_t fetch();
-      const std::uint32_t fetch(uint32_t offset);
+      const bool fetch(uint32_t& instruct);
+      const bool fetch(uint32_t& instruct, uint32_t offset);
 };
 /*
 namespace instructionFetcher {
