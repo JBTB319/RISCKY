@@ -35,6 +35,7 @@ namespace enums {
 
    void printEnum(IType type);
    void printEnum(Instruction name);
+   const char* getName(Instruction name);
 }
 
 

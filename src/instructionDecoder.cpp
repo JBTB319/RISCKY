@@ -6,9 +6,9 @@
 
 #define FUN3(bin) extractBinary(14,12,bin)
 #define FUN7(bin) extractBinary(31,25,bin)
-#define REGA(bin) extractBinary(19,15,bin)
-#define REGB(bin) extractBinary(24,20,bin)
-#define REGC(bin) extractBinary(11, 7,bin)
+#define R1(bin) extractBinary(19,15,bin)
+#define R2(bin) extractBinary(24,20,bin)
+#define RD(bin) extractBinary(11, 7,bin)
 
 namespace instructionDecoder {
    std::uint32_t extractBinary(int L, int R, std::uint32_t binary) {
@@ -19,7 +19,7 @@ namespace instructionDecoder {
 
    void extractIdentity(uint32_t binary, instruction& instruct) {
       instruct.Opcode = extractBinary(6,0, binary);
-      
+
       switch (instruct.Opcode){
          case 0x13: 
          case 0x67:
@@ -62,9 +62,9 @@ namespace instructionDecoder {
       instructionKey key = {instruct.Opcode, instruct.Fun3, instruct.Fun7};
 
       instruct.Name = instructionTable::lookUpItem(key);
-      instruct.RegA = REGA(binary);
-      instruct.RegB = REGB(binary);
-      instruct.RegC = REGC(binary);
+      instruct.r1 = R1(binary);
+      instruct.r2 = R2(binary);
+      instruct.rd = RD(binary);
 
       immediateGenerator::generate(instruct,binary);
 
@@ -72,3 +72,7 @@ namespace instructionDecoder {
    }
 
 }
+
+#undef R1
+#undef R2
+#undef RD

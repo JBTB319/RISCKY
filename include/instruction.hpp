@@ -10,9 +10,9 @@ struct instruction {
    std::uint8_t Opcode;
    std::uint8_t Fun3;
    std::uint8_t Fun7;
-   std::uint8_t RegA;
-   std::uint8_t RegB;
-   std::uint8_t RegC;
+   std::uint8_t r1;
+   std::uint8_t r2;
+   std::uint8_t rd;
    std::uint32_t Imm;
 };
 

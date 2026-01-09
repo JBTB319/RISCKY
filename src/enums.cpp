@@ -1,8 +1,7 @@
 #include "enums.hpp"
 
-void enums::printEnum(Instruction inst)
-{
-   const char *name;
+const char* enums::getName(Instruction inst) {
+   const char* name;
    switch (inst)
    {
       // NONE
@@ -52,7 +51,16 @@ void enums::printEnum(Instruction inst)
       // UPPER IMMEDIATE (U-Type)
       case Instruction::LUI: name = "LUI"; break;
       case Instruction::AUIPC: name = "AUIPC"; break;
-         }
+   }
+   return name;
+}
+
+void enums::printEnum(Instruction inst)
+{
+   const char* name;
+
+   name = getName(inst);
+
    std::cout << name << " ";
 }
 

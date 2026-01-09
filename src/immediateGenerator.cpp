@@ -1,6 +1,9 @@
 #include "immediateGenerator.hpp"
 #include "instructionDecoder.hpp"
 
+using iType = enums::IType;
+using names = enums::Instruction;
+
 namespace immediateGenerator {
    void signExtend(instruction& instruct, uint32_t sign) {
       if (instructionDecoder::extractBinary(sign,sign,instruct.Imm) == 1) {
@@ -15,17 +18,21 @@ namespace immediateGenerator {
       uint16_t part4 = 0; // offset [20]
 
       switch (instruct.Type){
-         case enums::IType::I_TYPE:
+         case iType::I_TYPE:
+            if (instruct.Name == names::SRAI || instruct.Name == names::SRLI || instruct.Name == names::SLLI) {
+               instruct.Imm = instructionDecoder::extractBinary(24,20, rawBinary);
+               break;
+            }
             instruct.Imm = instructionDecoder::extractBinary(31,20,rawBinary);
             signExtend(instruct, 11);
             break;
-         case enums::IType::S_TYPE:
+         case iType::S_TYPE:
             part1 = instructionDecoder::extractBinary(11,7, rawBinary); // offset [4..0]
             part2 = instructionDecoder::extractBinary(31,25, rawBinary); // offset [11..5]
             instruct.Imm = (part2 << 5 | part1);
             signExtend(instruct, 11);
             break;
-         case enums::IType::J_TYPE:
+         case iType::J_TYPE:
             part1 = instructionDecoder::extractBinary(30,21,rawBinary); // offset [1..10]
             part2 = instructionDecoder::extractBinary(20,20,rawBinary); // offset [11]
             part3 = instructionDecoder::extractBinary(19,12,rawBinary); // offset [12..19]
@@ -33,16 +40,17 @@ namespace immediateGenerator {
             instruct.Imm = (part4 << 20) | (part3 << 12) | (part2 << 11) | (part1 << 1);
             signExtend(instruct, 20);
             break;
-         case enums::IType::U_TYPE:
+         case iType::U_TYPE:
             instruct.Imm = instructionDecoder::extractBinary(31,12,rawBinary) << 12;
             break;
-         case enums::IType::B_TYPE:
+         case iType::B_TYPE:
             part1 = instructionDecoder::extractBinary(11,8,rawBinary); // offset [1..4]
             part2 = instructionDecoder::extractBinary(30,25, rawBinary); // offset [5..10]
             part3 = instructionDecoder::extractBinary(7,7,rawBinary); // offset [11]
             part4 = instructionDecoder::extractBinary(31,31,rawBinary); // offset [12]
             instruct.Imm = (part4 << 12) | (part3 << 11) | (part2 << 5) | (part1 << 1);
             signExtend(instruct,12);
+            break;
          default:
             instruct.Imm  = 0;
             break;

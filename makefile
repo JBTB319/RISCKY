@@ -45,5 +45,8 @@ clean:
 	@rm -rf $(BUILDDIR) $(TARGET)
 	@echo "Cleaned up build directory and executable."
 
+test:
+	
+
 # Phony targets
 .PHONY: all clean
